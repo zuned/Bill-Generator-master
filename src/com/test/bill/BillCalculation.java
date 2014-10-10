@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.test.bill.dto.MobileBill;
 import com.test.bill.dto.MonthlyData;
@@ -47,10 +50,21 @@ public class BillCalculation {
 
             current.setBillCycleStartDate(bill.getBillStartRange());
 
+            Random rnd = new Random();
+            int invoiceNo = 50460000 + rnd.nextInt(999389999);
+            String iNo = StringUtils.leftPad(new Integer(invoiceNo).toString(), 10, '0');
+            current.setInvoiceNo(iNo);
+
         } else {
 
             current.setPayment(previous.getTotalAmountDueInThisCycle());
             current.setPreviousBillAmount(previous.getTotalAmountDueInThisCycle());
+
+            Random rnd = new Random();
+            int in = 3008290 + rnd.nextInt(99973999);
+            int invoiceNo = new Integer(previous.getInvoiceNo()) + in;
+            String iNo = StringUtils.leftPad(new Integer(invoiceNo).toString(), 10, '0');
+            current.setInvoiceNo(iNo);
 
             Calendar first = new GregorianCalendar();
             first.setTime(previous.getBillCycleEndDate());
@@ -78,8 +92,8 @@ public class BillCalculation {
         fourth.add(Calendar.DAY_OF_MONTH, 15);
         current.setDueDate(fourth.getTime());
 
-        current.setInvoiceNo("21313141414");
-        current.setServiceTaxNo("5151516");
+        current.setServiceTaxNo("AAACB2100PST007");
+
         current.setCess(bill.getApplicableCessTax());
         current.setServiceTax(bill.getApplicableServiceTax());
         current.setBalanceCarryFwd(current.getPreviousBillAmount().subtract(current.getPayment()));
