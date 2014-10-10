@@ -17,14 +17,6 @@ public class MonthlyData {
 
     private BigDecimal creditLimit;
 
-    private BigDecimal previousBillAmount;
-
-    private BigDecimal payment;
-
-    private BigDecimal currentBillAmount;
-
-    private BigDecimal totalBillAmount; // previousBillAmount - payment + currentBillAmount
-
     private Date dueDate;
 
     private BigDecimal balanceCarryFwd; // previousBillAmount - payment
@@ -47,9 +39,24 @@ public class MonthlyData {
 
     private BigDecimal cess;
 
-    private BigDecimal totalCurrentCharges;
+    /**
+     * Previous bill amount
+     */
+    private BigDecimal previousBillAmount;
 
-    private BigDecimal totalAmountDue;
+    /**
+     * Payement done to last previous bill
+     */
+    private BigDecimal payment;
+
+    private BigDecimal totalCurrentChargesWithoutTax;
+
+    private BigDecimal totalCurrentChargesWithTax;
+
+    /**
+     * totalCurrentChargesWithTax - payment + previousBillAmount
+     */
+    private BigDecimal totalAmountDueInThisCycle;
 
     public String getInvoiceNo() {
 
@@ -109,46 +116,6 @@ public class MonthlyData {
     public void setCreditLimit(BigDecimal creditLimit) {
 
         this.creditLimit = creditLimit;
-    }
-
-    public BigDecimal getPreviousBillAmount() {
-
-        return this.previousBillAmount;
-    }
-
-    public void setPreviousBillAmount(BigDecimal previousBillAmount) {
-
-        this.previousBillAmount = previousBillAmount;
-    }
-
-    public BigDecimal getPayment() {
-
-        return this.payment;
-    }
-
-    public void setPayment(BigDecimal payment) {
-
-        this.payment = payment;
-    }
-
-    public BigDecimal getCurrentBillAmount() {
-
-        return this.currentBillAmount;
-    }
-
-    public void setCurrentBillAmount(BigDecimal currentBillAmount) {
-
-        this.currentBillAmount = currentBillAmount;
-    }
-
-    public BigDecimal getTotalBillAmount() {
-
-        return this.totalBillAmount;
-    }
-
-    public void setTotalBillAmount(BigDecimal totalBillAmount) {
-
-        this.totalBillAmount = totalBillAmount;
     }
 
     public Date getDueDate() {
@@ -261,24 +228,63 @@ public class MonthlyData {
         this.cess = cess;
     }
 
-    public BigDecimal getTotalCurrentCharges() {
+    public BigDecimal getPreviousBillAmount() {
 
-        return this.totalCurrentCharges;
+        return this.previousBillAmount;
     }
 
-    public void setTotalCurrentCharges(BigDecimal totalCurrentCharges) {
+    public void setPreviousBillAmount(BigDecimal previousBillAmount) {
 
-        this.totalCurrentCharges = totalCurrentCharges;
+        this.previousBillAmount = previousBillAmount;
     }
 
-    public BigDecimal getTotalAmountDue() {
+    public BigDecimal getPayment() {
 
-        return this.totalAmountDue;
+        return this.payment;
     }
 
-    public void setTotalAmountDue(BigDecimal totalAmountDue) {
+    public void setPayment(BigDecimal payment) {
 
-        this.totalAmountDue = totalAmountDue;
+        this.payment = payment;
+    }
+
+    public BigDecimal getTotalCurrentChargesWithoutTax() {
+
+        return this.totalCurrentChargesWithoutTax;
+    }
+
+    public void setTotalCurrentChargesWithoutTax(BigDecimal totalCurrentChargesWithoutTax) {
+
+        this.totalCurrentChargesWithoutTax = totalCurrentChargesWithoutTax;
+    }
+
+    public BigDecimal getTotalCurrentChargesWithTax() {
+
+        return this.totalCurrentChargesWithTax;
+    }
+
+    public void setTotalCurrentChargesWithTax(BigDecimal totalCurrentChargesWithTax) {
+
+        this.totalCurrentChargesWithTax = totalCurrentChargesWithTax;
+    }
+
+    public BigDecimal getTotalAmountDueInThisCycle() {
+
+        return this.totalAmountDueInThisCycle;
+    }
+
+    public void setTotalAmountDueInThisCycle(BigDecimal totalAmountDueInThisCycle) {
+
+        this.totalAmountDueInThisCycle = totalAmountDueInThisCycle;
+    }
+
+    @Override
+    public String toString() {
+
+        return "MonthlyData [invoiceNo=" + invoiceNo + ", invoiceGeneratedDate=" + invoiceGeneratedDate + ", billCycleStartDate=" + billCycleStartDate + ", billCycleEndDate=" + billCycleEndDate + ", serviceTaxNo=" + serviceTaxNo + ", creditLimit="
+            + creditLimit + ", dueDate=" + dueDate + ", balanceCarryFwd=" + balanceCarryFwd + ", monthlyCharges=" + monthlyCharges + ", featureCharges=" + featureCharges + ", usagesCharges=" + usagesCharges + ", roamingCharges=" + roamingCharges
+            + ", oneTimeCharges=" + oneTimeCharges + ", otherCharges=" + otherCharges + ", discounts=" + discounts + ", serviceTax=" + serviceTax + ", cess=" + cess + ", previousBillAmount=" + previousBillAmount + ", payment=" + payment
+            + ", totalCurrentChargesWithoutTax=" + totalCurrentChargesWithoutTax + ", totalCurrentChargesWithTax=" + totalCurrentChargesWithTax + ", totalAmountDueInThisCycle=" + totalAmountDueInThisCycle + "]";
     }
 
 }

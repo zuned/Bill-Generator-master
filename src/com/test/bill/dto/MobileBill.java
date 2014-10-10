@@ -2,6 +2,7 @@ package com.test.bill.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class MobileBill {
 
@@ -21,11 +22,11 @@ public class MobileBill {
 
     private Date billEndRange;
 
-    private Date billStartDate;
+    // private Date billStartDate;
 
-    private Date billEndDate;
+    // private Date billEndDate;
 
-    private MonthlyData monthlyData;
+    private List<MonthlyData> monthlyDataList;
 
     public String getAccountNo() {
 
@@ -65,16 +66,6 @@ public class MobileBill {
     public void setAddress(Address address) {
 
         this.address = address;
-    }
-
-    public MonthlyData getMonthlyData() {
-
-        return this.monthlyData;
-    }
-
-    public void setMonthlyData(MonthlyData monthlyData) {
-
-        this.monthlyData = monthlyData;
     }
 
     public BigDecimal getApplicableServiceTax() {
@@ -117,24 +108,21 @@ public class MobileBill {
         this.billEndRange = billEndRange;
     }
 
-    public Date getBillStartDate() {
+    public List<MonthlyData> getMonthlyDataList() {
 
-        return this.billStartDate;
+        return this.monthlyDataList;
     }
 
-    public void setBillStartDate(Date billStartDate) {
+    public void setMonthlyDataList(List<MonthlyData> monthlyDataList) {
 
-        this.billStartDate = billStartDate;
+        this.monthlyDataList = monthlyDataList;
     }
 
-    public Date getBillEndDate() {
+    @Override
+    public String toString() {
 
-        return this.billEndDate;
-    }
-
-    public void setBillEndDate(Date billEndDate) {
-
-        this.billEndDate = billEndDate;
+        return "MobileBill [accountNo=" + accountNo + ", cellNo=" + cellNo + ", name=" + name + ", address=" + address + ", applicableServiceTax=" + applicableServiceTax + ", applicableCessTax=" + applicableCessTax + ", billStartRange="
+            + billStartRange + ", billEndRange=" + billEndRange + ", monthlyDataList=" + monthlyDataList + "]";
     }
 
 }

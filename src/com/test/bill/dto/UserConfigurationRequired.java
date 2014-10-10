@@ -1,8 +1,5 @@
 package com.test.bill.dto;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class UserConfigurationRequired {
 
     private String accountNo;
@@ -21,13 +18,9 @@ public class UserConfigurationRequired {
 
     private String billEndRange;
 
-    private String billStartDate;
-
-    private String billEndDate;
-
     public String getAccountNo() {
 
-        return accountNo;
+        return this.accountNo;
     }
 
     public void setAccountNo(String accountNo) {
@@ -37,7 +30,7 @@ public class UserConfigurationRequired {
 
     public String getCellNo() {
 
-        return cellNo;
+        return this.cellNo;
     }
 
     public void setCellNo(String cellNo) {
@@ -47,7 +40,7 @@ public class UserConfigurationRequired {
 
     public String getName() {
 
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -57,7 +50,7 @@ public class UserConfigurationRequired {
 
     public Address getAddress() {
 
-        return address;
+        return this.address;
     }
 
     public void setAddress(Address address) {
@@ -67,7 +60,7 @@ public class UserConfigurationRequired {
 
     public String getApplicableServiceTax() {
 
-        return applicableServiceTax;
+        return this.applicableServiceTax;
     }
 
     public void setApplicableServiceTax(String applicableServiceTax) {
@@ -77,7 +70,7 @@ public class UserConfigurationRequired {
 
     public String getApplicableCessTax() {
 
-        return applicableCessTax;
+        return this.applicableCessTax;
     }
 
     public void setApplicableCessTax(String applicableCessTax) {
@@ -87,7 +80,7 @@ public class UserConfigurationRequired {
 
     public String getBillStartRange() {
 
-        return billStartRange;
+        return this.billStartRange;
     }
 
     public void setBillStartRange(String billStartRange) {
@@ -97,32 +90,12 @@ public class UserConfigurationRequired {
 
     public String getBillEndRange() {
 
-        return billEndRange;
+        return this.billEndRange;
     }
 
     public void setBillEndRange(String billEndRange) {
 
         this.billEndRange = billEndRange;
-    }
-
-    public String getBillStartDate() {
-
-        return billStartDate;
-    }
-
-    public void setBillStartDate(String billStartDate) {
-
-        this.billStartDate = billStartDate;
-    }
-
-    public String getBillEndDate() {
-
-        return billEndDate;
-    }
-
-    public void setBillEndDate(String billEndDate) {
-
-        this.billEndDate = billEndDate;
     }
 
 }
