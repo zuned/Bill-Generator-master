@@ -38,8 +38,8 @@ public class PropertReader {
         address.setCity(prop.getProperty("city"));
         address.setPincode(prop.getProperty("pincode"));
         address.setState(prop.getProperty("state"));
-
         ucr.setAddress(address);
+
         ucr.setApplicableCessTax(prop.getProperty("applicableServiceTax"));
         ucr.setApplicableServiceTax(prop.getProperty("applicableCessTax"));
         ucr.setBillEndRange(prop.getProperty("billEndRange"));
