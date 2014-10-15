@@ -34,6 +34,8 @@ public class MonthlyData {
     private BigDecimal otherCharges;
 
     private BigDecimal discounts;
+    
+    private BigDecimal lateFee;
 
     private BigDecimal serviceTax;
 
@@ -168,7 +170,15 @@ public class MonthlyData {
         this.usagesCharges = usagesCharges;
     }
 
-    public BigDecimal getRoamingCharges() {
+    public BigDecimal getLateFee() {
+		return lateFee;
+	}
+
+	public void setLateFee(BigDecimal lateFee) {
+		this.lateFee = lateFee;
+	}
+
+	public BigDecimal getRoamingCharges() {
 
         return this.roamingCharges;
     }

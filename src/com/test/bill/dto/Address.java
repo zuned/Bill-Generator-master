@@ -62,10 +62,4 @@ public class Address {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-
-        return "Address [addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", pincode=" + pincode + ", state=" + state + "]";
-    }
-
 }

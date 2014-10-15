@@ -152,6 +152,8 @@ public class BillCalculation {
 
         BigDecimal totalAmountDueInThisCycle = totalCurrentBillChargesWithTax.subtract(md.getPayment()).add(md.getPreviousBillAmount());
 
+        md.setLateFee(new BigDecimal("50.00"));
+        
         md.setCess(cess);
         md.setServiceTax(serviceTax);
         md.setTotalCurrentChargesWithoutTax(totalCurrentBillChargesWithoutTax);
