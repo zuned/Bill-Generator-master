@@ -100,6 +100,7 @@ public class BillCalculation {
         current.setOneTimeCharges(new BigDecimal("0.00"));
         current.setDiscounts(new BigDecimal("0.00"));
         current.setOtherCharges(new BigDecimal("0.00"));
+        current.setLateFee(new BigDecimal("50.00"));
 
         return current;
     }
@@ -152,8 +153,6 @@ public class BillCalculation {
 
         BigDecimal totalAmountDueInThisCycle = totalCurrentBillChargesWithTax.subtract(md.getPayment()).add(md.getPreviousBillAmount());
 
-        md.setLateFee(new BigDecimal("50.00"));
-        
         md.setCess(cess);
         md.setServiceTax(serviceTax);
         md.setTotalCurrentChargesWithoutTax(totalCurrentBillChargesWithoutTax);
