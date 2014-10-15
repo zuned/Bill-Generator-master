@@ -53,8 +53,8 @@ public class BillGenerator {
         for (MonthlyData data : bill.getMonthlyDataList()) {
             Map<String, String> populatedMap = PopulateBillPDF.populateMapUsingEnrollmentDTO(bill, data);
             byte[] outputPDF = null;
-            String billPrefix = templateLocator.get(ucr.getCompany() + "_" + ucr.getBillType()) + "_";
-            String billPDF = ucr.getGeneratedBillPath() + File.separator + billPrefix + data.getBillCycleStartDate().getMonth() + ".pdf";
+            String billPrefix = "_" + templateLocator.get(ucr.getCompany() + "_" + ucr.getBillType());
+            String billPDF = ucr.getGeneratedBillPath() + File.separator + data.getBillCycleStartDate().getMonth() + billPrefix;
             try {
                 outputPDF = PDFProcessorService.writePDF(populatedMap, pdfTemplate);
                 if (outputPDF != null) {
