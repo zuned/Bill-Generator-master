@@ -45,6 +45,11 @@ public class PropertReader {
         ucr.setBillEndRange(prop.getProperty("billEndRange"));
         ucr.setBillStartRange(prop.getProperty("billStartRange"));
 
+        ucr.setBillType(prop.getProperty("billType"));
+        ucr.setCompany(prop.getProperty("company"));
+        ucr.setTemplatePath(prop.getProperty("templatePath"));
+        ucr.setGeneratedBillPath(prop.getProperty("generatedBillPath"));
+
         return ucr;
     }
 

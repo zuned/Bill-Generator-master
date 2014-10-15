@@ -1,8 +1,10 @@
 package com.test.bill;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.test.bill.dto.MobileBill;
@@ -14,25 +16,45 @@ import com.test.bill.pdf.service.PDFProcessorService;
 
 public class BillGenerator {
 
+    private static Map<String, String> templateLocator = new HashMap<String, String>();
+
+    static {
+        templateLocator.put("airtel_mobile", "airtel_mobile.pdf");
+        templateLocator.put("airtel_broadband", "airtel_broadband.pdf");
+        templateLocator.put("idea_mobile", "idea_mobile.pdf");
+    }
+
     public static void main(String[] args) throws IOException {
 
         PropertReader propertReader = new PropertReader();
         UserConfigurationRequired ucr = propertReader.getPropValues();
         MobileBill bill = BillCalculation.generateBillDDTO(ucr);
-        generateAndSaveBills(bill);
+
+        generateAndSaveBills(bill, ucr);
         System.out.println(bill);
     }
 
-    private static void generateAndSaveBills(MobileBill bill)
-                                                             throws IOException {
+    private static String getTemaplatePath(UserConfigurationRequired ucr) {
 
-        String templateLocation = "C:\\workspace\\workspace_ha-phase2_dev\\Bill-Generator\\templates\\idea_mobile.pdf";
+        String path = ucr.getTemplatePath() + File.separator + templateLocator.get(ucr.getCompany() + "_" + ucr.getBillType());
+
+        return path;
+
+    }
+
+    private static void generateAndSaveBills(MobileBill bill, UserConfigurationRequired ucr)
+                                                                                            throws IOException {
+
+        String templateLocation = getTemaplatePath(ucr);
+
+        // String templateLocation = "C:\\workspace\\workspace_ha-phase2_dev\\Bill-Generator\\templates\\idea_mobile.pdf";
         byte[] pdfTemplate = PDFConfigLookupService.getTemplateByLocation(templateLocation);
 
         for (MonthlyData data : bill.getMonthlyDataList()) {
             Map<String, String> populatedMap = PopulateBillPDF.populateMapUsingEnrollmentDTO(bill, data);
             byte[] outputPDF = null;
-            String billPDF = "C:\\workspace\\workspace_ha-phase2_dev\\Bill-Generator\\bill\\bill_" + data.getBillCycleStartDate().getMonth() + ".pdf";
+            String billPrefix = templateLocator.get(ucr.getCompany() + "_" + ucr.getBillType()) + "_";
+            String billPDF = ucr.getGeneratedBillPath() + File.separator + billPrefix + data.getBillCycleStartDate().getMonth() + ".pdf";
             try {
                 outputPDF = PDFProcessorService.writePDF(populatedMap, pdfTemplate);
                 if (outputPDF != null) {

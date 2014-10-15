@@ -18,6 +18,20 @@ public class UserConfigurationRequired {
 
     private String billEndRange;
 
+    private String generatedBillPath;
+
+    /**
+     * airtel/idea/vodafone
+     */
+    private String company;
+
+    /**
+     * mobile/ broadband
+     */
+    private String billType;
+
+    private String templatePath;
+
     public String getAccountNo() {
 
         return this.accountNo;
@@ -96,6 +110,46 @@ public class UserConfigurationRequired {
     public void setBillEndRange(String billEndRange) {
 
         this.billEndRange = billEndRange;
+    }
+
+    public String getCompany() {
+
+        return this.company;
+    }
+
+    public void setCompany(String company) {
+
+        this.company = company;
+    }
+
+    public String getBillType() {
+
+        return this.billType;
+    }
+
+    public void setBillType(String billType) {
+
+        this.billType = billType;
+    }
+
+    public String getTemplatePath() {
+
+        return this.templatePath;
+    }
+
+    public void setTemplatePath(String templatePath) {
+
+        this.templatePath = templatePath;
+    }
+
+    public String getGeneratedBillPath() {
+
+        return this.generatedBillPath;
+    }
+
+    public void setGeneratedBillPath(String generatedBillPath) {
+
+        this.generatedBillPath = generatedBillPath;
     }
 
 }
