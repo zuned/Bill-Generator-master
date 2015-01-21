@@ -15,11 +15,12 @@ import com.test.bill.dto.MobileBill;
 import com.test.bill.dto.MonthlyData;
 import com.test.bill.dto.UserConfigurationRequired;
 
+@SuppressWarnings("nls")
 public class BillCalculation {
 
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 
-    public static MobileBill generateBillDDTO(UserConfigurationRequired ucr) throws ParseException {
+    public static MobileBill generateBillDDTO(final UserConfigurationRequired ucr) throws ParseException {
 
         MobileBill mobileBill = conversion(ucr);
         List<MonthlyData> list = new ArrayList<MonthlyData>();
@@ -38,9 +39,8 @@ public class BillCalculation {
             if (firstFlag) {
                 previousMonthlyData = null;
                 firstFlag = false;
-            } else {
+            } else
                 previousMonthlyData = list.get(i - 1);
-            }
 
             currentMonthlyData = configureMonthlyCycle(currentMonthlyData, previousMonthlyData, mobileBill);
             currentMonthlyData = generate(mobileBill, currentMonthlyData);
@@ -54,7 +54,7 @@ public class BillCalculation {
         return mobileBill;
     }
 
-    private static MonthlyData configureMonthlyCycle(MonthlyData current, MonthlyData previous, MobileBill bill) {
+    private static MonthlyData configureMonthlyCycle(final MonthlyData current, final MonthlyData previous, final MobileBill bill) {
 
         if (previous == null) {
 
@@ -118,7 +118,7 @@ public class BillCalculation {
         return current;
     }
 
-    private static MobileBill conversion(UserConfigurationRequired ucr) throws ParseException {
+    private static MobileBill conversion(final UserConfigurationRequired ucr) throws ParseException {
 
         MobileBill mobileBill = new MobileBill();
 
@@ -137,7 +137,7 @@ public class BillCalculation {
 
     }
 
-    private static BigDecimal randomNo(int range) {
+    private static BigDecimal randomNo(final int range) {
 
         BigDecimal rangeInBD = new BigDecimal(range);
         BigDecimal randomNoGeneration = new BigDecimal(Math.random()); // between 0 to < 1.0
@@ -145,14 +145,14 @@ public class BillCalculation {
         return actualRandonNo.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
-    private static MonthlyData generate(MobileBill mb, MonthlyData md) {
+    private static MonthlyData generate(final MobileBill mb, final MonthlyData md) {
 
-        md.setMonthlyCharges(new BigDecimal("599.00"));
+        md.setMonthlyCharges(new BigDecimal("649.00"));
         md.setFeatureCharges(new BigDecimal("399.00"));
         md.setRoamingCharges(randomNo(300));
         md.setUsagesCharges(randomNo(300));
 
-        BigDecimal totalCurrentBillChargesWithoutTax = md.getMonthlyCharges().add(md.getFeatureCharges()).add(md.getRoamingCharges()).add(md.getRoamingCharges()).add(md.getUsagesCharges()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalCurrentBillChargesWithoutTax = md.getMonthlyCharges().add(md.getFeatureCharges()).add(md.getRoamingCharges()).add(md.getUsagesCharges()).setScale(2, BigDecimal.ROUND_HALF_UP);
 
         BigDecimal serviceTax = totalCurrentBillChargesWithoutTax.multiply(md.getServiceTax()).divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 
