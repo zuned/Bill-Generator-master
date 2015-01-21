@@ -10,7 +10,8 @@ import com.test.bill.dto.UserConfigurationRequired;
 
 public class PropertReader {
 
-    public UserConfigurationRequired getPropValues() throws IOException {
+    @SuppressWarnings("nls")
+    public static UserConfigurationRequired getPropValues() throws IOException {
 
         UserConfigurationRequired ucr = new UserConfigurationRequired();
         Properties prop = new Properties();
@@ -20,9 +21,8 @@ public class PropertReader {
 
         FileInputStream fis = new FileInputStream("C:\\workspace\\workspace_ha-phase2_dev\\Bill-Generator\\config.properties");
 
-        if (fis == null) {
+        if (fis == null)
             throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-        }
 
         prop.load(fis);
 

@@ -22,10 +22,6 @@ public class MobileBill {
 
     private Date billEndRange;
 
-    // private Date billStartDate;
-
-    // private Date billEndDate;
-
     private List<MonthlyData> monthlyDataList;
 
     public String getAccountNo() {
@@ -118,11 +114,13 @@ public class MobileBill {
         this.monthlyDataList = monthlyDataList;
     }
 
+    @SuppressWarnings("nls")
     @Override
     public String toString() {
 
-        return "MobileBill [accountNo=" + accountNo + ", cellNo=" + cellNo + ", name=" + name + ", address=" + address + ", applicableServiceTax=" + applicableServiceTax + ", applicableCessTax=" + applicableCessTax + ", billStartRange="
-            + billStartRange + ", billEndRange=" + billEndRange + ", monthlyDataList=" + monthlyDataList + "]";
+        return "MobileBill [accountNo=" + this.accountNo + ", cellNo=" + this.cellNo + ", name=" + this.name + ", address=" + this.address + ", applicableServiceTax=" + this.applicableServiceTax + ", applicableCessTax=" + this.applicableCessTax
+            + ", billStartRange="
+            + this.billStartRange + ", billEndRange=" + this.billEndRange + ", monthlyDataList=" + this.monthlyDataList + "]";
     }
 
 }

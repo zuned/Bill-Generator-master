@@ -34,7 +34,7 @@ public class MonthlyData {
     private BigDecimal otherCharges;
 
     private BigDecimal discounts;
-    
+
     private BigDecimal lateFee;
 
     private BigDecimal serviceTax;
@@ -171,14 +171,16 @@ public class MonthlyData {
     }
 
     public BigDecimal getLateFee() {
-		return lateFee;
-	}
 
-	public void setLateFee(BigDecimal lateFee) {
-		this.lateFee = lateFee;
-	}
+        return this.lateFee;
+    }
 
-	public BigDecimal getRoamingCharges() {
+    public void setLateFee(BigDecimal lateFee) {
+
+        this.lateFee = lateFee;
+    }
+
+    public BigDecimal getRoamingCharges() {
 
         return this.roamingCharges;
     }
@@ -288,13 +290,17 @@ public class MonthlyData {
         this.totalAmountDueInThisCycle = totalAmountDueInThisCycle;
     }
 
+    @SuppressWarnings("nls")
     @Override
     public String toString() {
 
-        return "MonthlyData [invoiceNo=" + invoiceNo + ", invoiceGeneratedDate=" + invoiceGeneratedDate + ", billCycleStartDate=" + billCycleStartDate + ", billCycleEndDate=" + billCycleEndDate + ", serviceTaxNo=" + serviceTaxNo + ", creditLimit="
-            + creditLimit + ", dueDate=" + dueDate + ", balanceCarryFwd=" + balanceCarryFwd + ", monthlyCharges=" + monthlyCharges + ", featureCharges=" + featureCharges + ", usagesCharges=" + usagesCharges + ", roamingCharges=" + roamingCharges
-            + ", oneTimeCharges=" + oneTimeCharges + ", otherCharges=" + otherCharges + ", discounts=" + discounts + ", serviceTax=" + serviceTax + ", cess=" + cess + ", previousBillAmount=" + previousBillAmount + ", payment=" + payment
-            + ", totalCurrentChargesWithoutTax=" + totalCurrentChargesWithoutTax + ", totalCurrentChargesWithTax=" + totalCurrentChargesWithTax + ", totalAmountDueInThisCycle=" + totalAmountDueInThisCycle + "]";
+        return "MonthlyData [invoiceNo=" + this.invoiceNo + ", invoiceGeneratedDate=" + this.invoiceGeneratedDate + ", billCycleStartDate=" + this.billCycleStartDate + ", billCycleEndDate=" + this.billCycleEndDate + ", serviceTaxNo="
+            + this.serviceTaxNo + ", creditLimit="
+            + this.creditLimit + ", dueDate=" + this.dueDate + ", balanceCarryFwd=" + this.balanceCarryFwd + ", monthlyCharges=" + this.monthlyCharges + ", featureCharges=" + this.featureCharges + ", usagesCharges=" + this.usagesCharges
+            + ", roamingCharges=" + this.roamingCharges
+            + ", oneTimeCharges=" + this.oneTimeCharges + ", otherCharges=" + this.otherCharges + ", discounts=" + this.discounts + ", serviceTax=" + this.serviceTax + ", cess=" + this.cess + ", previousBillAmount=" + this.previousBillAmount
+            + ", payment=" + this.payment
+            + ", totalCurrentChargesWithoutTax=" + this.totalCurrentChargesWithoutTax + ", totalCurrentChargesWithTax=" + this.totalCurrentChargesWithTax + ", totalAmountDueInThisCycle=" + this.totalAmountDueInThisCycle + "]";
     }
 
 }

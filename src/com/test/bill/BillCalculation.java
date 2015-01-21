@@ -1,6 +1,8 @@
 package com.test.bill;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,26 +17,37 @@ import com.test.bill.dto.UserConfigurationRequired;
 
 public class BillCalculation {
 
-    public static MobileBill generateBillDDTO(UserConfigurationRequired ucr) {
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+
+    public static MobileBill generateBillDDTO(UserConfigurationRequired ucr) throws ParseException {
 
         MobileBill mobileBill = conversion(ucr);
         List<MonthlyData> list = new ArrayList<MonthlyData>();
 
-        for (int i = 0; i < 12; i++) {
+        Calendar startCounter = new GregorianCalendar();
+        startCounter.setTime(mobileBill.getBillStartRange());
+
+        boolean firstFlag = true;
+        int i = 0;
+
+        while (startCounter.getTime().before(mobileBill.getBillEndRange())) {
             MonthlyData currentMonthlyData = new MonthlyData();
 
             MonthlyData previousMonthlyData;
 
-            if (i == 0) {
+            if (firstFlag) {
                 previousMonthlyData = null;
+                firstFlag = false;
             } else {
                 previousMonthlyData = list.get(i - 1);
             }
 
             currentMonthlyData = configureMonthlyCycle(currentMonthlyData, previousMonthlyData, mobileBill);
-
             currentMonthlyData = generate(mobileBill, currentMonthlyData);
+
             list.add(currentMonthlyData);
+            i++;
+            startCounter.add(Calendar.MONTH, 1);
         }
         mobileBill.setMonthlyDataList(list);
 
@@ -105,7 +118,7 @@ public class BillCalculation {
         return current;
     }
 
-    private static MobileBill conversion(UserConfigurationRequired ucr) {
+    private static MobileBill conversion(UserConfigurationRequired ucr) throws ParseException {
 
         MobileBill mobileBill = new MobileBill();
 
@@ -116,13 +129,9 @@ public class BillCalculation {
         mobileBill.setApplicableServiceTax(new BigDecimal(ucr.getApplicableServiceTax()));
         mobileBill.setApplicableCessTax(new BigDecimal(ucr.getApplicableCessTax()));
 
-        Calendar start = new GregorianCalendar();
-        start.set(2014, 3, 1);
-        mobileBill.setBillStartRange(start.getTime());
+        mobileBill.setBillStartRange(formatter.parse(ucr.getBillStartRange()));
 
-        Calendar end = new GregorianCalendar();
-        end.set(2015, 2, 31);
-        mobileBill.setBillEndRange(end.getTime());
+        mobileBill.setBillEndRange(formatter.parse(ucr.getBillEndRange()));
 
         return mobileBill;
 
